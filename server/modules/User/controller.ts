@@ -1,6 +1,10 @@
 import * as HttpStatus from 'http-status';
 import { Request, Response } from 'express';
+import * as _ from 'lodash';
 import User from './services';
+import { onError } from '../../api/handlers/errorHanderResponse';
+import { onSuccess } from '../../api/handlers/successHanderResponse';
+import { onErrorHandler } from '../../config/dbErrorHandler';
 
 class UserController {
 
@@ -12,39 +16,40 @@ class UserController {
 
     findAll(req: Request, res: Response) {
         this.userService.findAll()
-        .then(data => {
-            res.status(HttpStatus.OK).json({payload: data});
-        })
-        .catch(err => {
-            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-                payload: "Erro ao buscar usuários.",
-                err
-            })
-        });
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao buscar usuários.'));
     }
 
     findOne(req: Request, res: Response) {
-        res.status(HttpStatus.OK).json({
-            message: 'ok'
-        });
+        const userId = parseInt(req.params.id);
+        this.userService.findById(userId)
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao buscar usuário.'));
     }
 
     create(req: Request, res: Response) {
-        res.status(HttpStatus.OK).json({
-            message: 'ok'
-        });
+        this.userService.create(req.body)
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao salvar usuário.'));
     }
 
     update(req: Request, res: Response) {
-        res.status(HttpStatus.OK).json({
-            message: 'ok'
-        });
+        const userId = parseInt(req.params.id);
+        this.userService.update(userId, req.body)        
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao atualizar usuário.'));
     }
 
     delete(req: Request, res: Response) {
-        res.status(HttpStatus.OK).json({
-            message: 'ok'
-        });
+        const userId = parseInt(req.params.id);
+        this.userService.delete(userId)
+            .then(_.partial(onSuccess, res))
+            .catch(_.partial(onErrorHandler, res))
+            .catch(_.partial(onError, res, 'Erro ao excluir usuário.'));
     }
 }
 

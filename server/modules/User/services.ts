@@ -15,21 +15,21 @@ class User implements IUser {
         return model.User.findAll({
             order: ['username']
         })
-        .then(createUsers);
+            .then(createUsers);
     }
 
     findById(id: number): blueBird<IUser[]> {
         return model.User.findOne({
             where: {id}
         })
-        .then(createUserById);
+            .then(createUserById);
     }
 
     findByEmail(email: string): blueBird<IUser[]> {
         return model.User.findOne({
             where: {email}
         })
-        .then(createUserByEmail);
+            .then(createUserByEmail);
     }
 
     create(user: any) {
@@ -43,7 +43,7 @@ class User implements IUser {
         });
     }
 
-    delete(id: number, use: any) {
+    delete(id: number) {
         return model.User.destroy({
             where: {id}
         });
