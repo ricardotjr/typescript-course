@@ -1,13 +1,25 @@
 import * as HttpStatus from 'http-status';
 import { Request, Response } from 'express';
+import User from './services';
 
 class UserController {
 
-    constructor() {}
+    private userService: User;
+
+    constructor() {
+        this.userService = new User();
+    }
 
     findAll(req: Request, res: Response) {
-        res.status(HttpStatus.OK).json({
-            message: 'ok'
+        this.userService.findAll()
+        .then(data => {
+            res.status(HttpStatus.OK).json({payload: data});
+        })
+        .catch(err => {
+            res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+                payload: "Erro ao buscar usuários.",
+                err
+            })
         });
     }
 
