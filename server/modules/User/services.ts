@@ -18,16 +18,16 @@ class User implements IUser {
             .then(createUsers);
     }
 
-    findById(id: number): blueBird<IUser[]> {
+    findById(id: number): blueBird<IUser> {
         return model.User.findOne({
             where: {id}
         })
             .then(createUserById);
     }
 
-    findByEmail(email: string): blueBird<IUser[]> {
+    findByUsername(username: string): blueBird<IUser[]> {
         return model.User.findOne({
-            where: {email}
+            where: {username}
         })
             .then(createUserByEmail);
     }
