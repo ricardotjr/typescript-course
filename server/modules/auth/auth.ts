@@ -5,8 +5,6 @@ import authSuccess from '../../api/responses/authSuccess';
 import authFail from '../../api/responses/authFail';
 import { reduce } from 'bluebird';
 
-const UserService = new User();
-
 class TokenRoutes {
 
     auth(req: Request, res: Response) {
@@ -16,7 +14,7 @@ class TokenRoutes {
         }
 
         if (credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password')) {
-            UserService
+            User
             .findByUsername(credentials.username)
             .then(_.partial(authSuccess, res, credentials))
             .catch(_.partial(authFail, req, res));
@@ -24,4 +22,4 @@ class TokenRoutes {
     }
 }
 
-export default TokenRoutes;
+export default new TokenRoutes();

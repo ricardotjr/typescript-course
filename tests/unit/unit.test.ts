@@ -11,9 +11,7 @@ describe('Test Unit of Controllers', () => {
                 email: 'new@user.com'
             };
 
-            const user = new User();
-
-            return user.create(newUser)
+            return User.create(newUser)
             .then(data => {
                 expect(data.dataValues).to.have.all.keys([
                     'email', 'id', 'username', 'password', 'updateAt', 'createAt'

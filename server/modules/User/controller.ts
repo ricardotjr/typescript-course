@@ -8,14 +8,8 @@ import { onErrorHandler } from '../../config/dbErrorHandler';
 
 class UserController {
 
-    private userService: User;
-
-    constructor() {
-        this.userService = new User();
-    }
-
     findAll(req: Request, res: Response) {
-        this.userService.findAll()
+        User.findAll()
             .then(_.partial(onSuccess, res))
             .catch(_.partial(onErrorHandler, res))
             .catch(_.partial(onError, res, 'Erro ao buscar usuários.'));
@@ -23,14 +17,14 @@ class UserController {
 
     findOne(req: Request, res: Response) {
         const userId = parseInt(req.params.id);
-        this.userService.findById(userId)
+        User.findById(userId)
             .then(_.partial(onSuccess, res))
             .catch(_.partial(onErrorHandler, res))
             .catch(_.partial(onError, res, 'Erro ao buscar usuário.'));
     }
 
     create(req: Request, res: Response) {
-        this.userService.create(req.body)
+        User.create(req.body)
             .then(_.partial(onSuccess, res))
             .catch(_.partial(onErrorHandler, res))
             .catch(_.partial(onError, res, 'Erro ao salvar usuário.'));
@@ -38,7 +32,7 @@ class UserController {
 
     update(req: Request, res: Response) {
         const userId = parseInt(req.params.id);
-        this.userService.update(userId, req.body)        
+        User.update(userId, req.body)        
             .then(_.partial(onSuccess, res))
             .catch(_.partial(onErrorHandler, res))
             .catch(_.partial(onError, res, 'Erro ao atualizar usuário.'));
@@ -46,7 +40,7 @@ class UserController {
 
     delete(req: Request, res: Response) {
         const userId = parseInt(req.params.id);
-        this.userService.delete(userId)
+        User.delete(userId)
             .then(_.partial(onSuccess, res))
             .catch(_.partial(onErrorHandler, res))
             .catch(_.partial(onError, res, 'Erro ao excluir usuário.'));
