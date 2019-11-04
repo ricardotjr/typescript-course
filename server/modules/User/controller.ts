@@ -2,8 +2,8 @@ import * as HttpStatus from 'http-status';
 import { Request, Response } from 'express';
 import * as _ from 'lodash';
 import User from './services';
-import { onError } from '../../api/handlers/errorHanderResponse';
-import { onSuccess } from '../../api/handlers/successHanderResponse';
+import { onError } from '../../api/responses/errorHanderResponse';
+import { onSuccess } from '../../api/responses/successHanderResponse';
 import { onErrorHandler } from '../../config/dbErrorHandler';
 
 class UserController {

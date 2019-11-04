@@ -3,7 +3,7 @@ import { Application } from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import Routes from './routes/routes';
-import { errorHandlerApi } from './handlers/errorHandlerApi';
+import { errorHandlerApi } from './errorHandlerApi';
 import AuthConfig from '../auth';
 
 class Api {
@@ -27,7 +27,7 @@ class Api {
     }
 
     private router(app: Application, auth: any): void {
-        new Routes(app, auth);
+        Routes.initRoutes(app, auth);
     }
 }
 

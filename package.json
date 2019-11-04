@@ -13,9 +13,11 @@
   "author": "ricardotjr",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
     "@types/jwt-simple": "^0.5.33",
     "@types/passport": "^1.0.1",
     "@types/passport-jwt": "^3.0.2",
+    "bcrypt": "^3.0.6",
     "bluebird": "^3.7.1",
     "body-parser": "^1.17.1",
     "express": "^4.15.2",

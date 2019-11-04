@@ -39,7 +39,9 @@ class User implements IUser {
     update(id: number, user: any) {
         return model.User.update(user, {
             where: {id},
-            fields: ['username', 'email', 'password']
+            fields: ['username', 'email', 'password'],
+            hooks: true,
+            individualHooks: true
         });
     }
 
