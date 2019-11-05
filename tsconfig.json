@@ -2,19 +2,17 @@
     "compilerOptions": {
         "target": "es5",
         "module": "commonjs",
-        "outDir": "build",
-        "typeRoots": [
-            "../node_modules/@types"
-        ],
-        "types": [
-            "node"
-        ]
+        "noImplicitAny": true,
+        "removeComments": true,
+        "outDir": "dist",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "typeRoots": [ "node_modules/@types" ],
+        "types": [ "node" ]
     },
     "include": [
         "server/**/*.ts",
-        "server/*.ts",
-        "tests/**/*.ts",
-        "tests/*.ts"
+        "server/*.ts"
     ],
     "exclude": [
         "node_modules"
