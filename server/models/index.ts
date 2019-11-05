@@ -7,8 +7,9 @@ const basename = path.basename(__filename);
 const config = require('../config/env/config')();
 const env = config.env || 'development';
 const db: any = {};
+const modelRelations = require('./relations/relations')
 
-let sequelize;
+let sequelize: any;
 if (config.dbUrl) {
   sequelize = new Sequelize(config.dbUrl);
 } else {
@@ -17,10 +18,10 @@ if (config.dbUrl) {
 
 fs
   .readdirSync(__dirname)
-  .filter(file => {
+  .filter((file: any) => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
-  .forEach(file => {
+  .forEach((file: any) => {
     const model = sequelize['import'](path.join(__dirname, file));
     db[model.name] = model;
   });
@@ -33,5 +34,7 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+//modelRelations(db);
 
 module.exports = db;
