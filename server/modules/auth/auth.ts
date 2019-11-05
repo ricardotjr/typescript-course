@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 import * as _ from 'lodash';
 import User from '../User/services';
-import authSuccess from '../../api/responses/authSuccess';
-import authFail from '../../api/responses/authFail';
+import Handlers from '../../api/responses/handlers';
 import { reduce } from 'bluebird';
 
 class TokenRoutes {
@@ -16,8 +15,8 @@ class TokenRoutes {
         if (credentials.hasOwnProperty('username') && credentials.hasOwnProperty('password')) {
             User
             .findByUsername(credentials.username)
-            .then(_.partial(authSuccess, res, credentials))
-            .catch(_.partial(authFail, req, res));
+            .then(_.partial(Handlers.authSuccess, res, credentials))
+            .catch(_.partial(Handlers.authFail, req, res));
         }
     }
 }
